@@ -15,6 +15,7 @@ import MyResponsivePie from './ResponsivePie';
 import YearDropdown from './YearDropdown';
 import SeasonDropdown from './SeasonDropdown';
 import BrandDropdown from './BrandDropdown';
+import DisplayImages from './DisplayImages';
 
 class App extends Component {
   constructor(props) {
@@ -67,15 +68,15 @@ class App extends Component {
             <BrandDropdown value={selectedBrand}
             onChange={this.handleBrandChange}
             brands={['Chanel', 'Christian Dior', 'Loewe', 'Dolce & Gabbana']} />
-            <YearDropdown value={selectedYear}
-            onChange={this.handleYearChange}
-            years={[2020, 2019, 2018, 2017, 2016, 2015]} />
             <SeasonDropdown value={selectedSeason}
             onChange={this.handleSeasonChange}
             seasons={['Fall', 'Spring','Pre-Fall', 'Resort', 'Spring Couture', 'Fall Couture']} />
+            <YearDropdown value={selectedYear}
+            onChange={this.handleYearChange}
+            years={[2020, 2019, 2018, 2017, 2016, 2015]} />
             </div>
           </div>
-        <MyResponsivePie />
+      <DisplayImages/>
       </div>
     )
   }
