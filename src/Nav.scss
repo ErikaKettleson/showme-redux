@@ -1,0 +1,25 @@
+  .nav-bar {
+      background-color: white;
+      height: 8vh;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+  }
+  .nav-logo {
+      height: 5vh;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
