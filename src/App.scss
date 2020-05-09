@@ -42,5 +42,27 @@
   color: white;
   font-family: Futura;
   font-size: 3em;
-  text-shadow: 10px 10px 0px #031926;
+  text-shadow: 7px 7px 0px #031926;
 }
+
+.dropdown-selects {
+  display: flex;
+  justify-content: space-around;
+
+  span {
+    padding: 1em;
+  }
+}
+
+select {
+  width: 15vw;
+  height: 5vh;
+  background-color: white;
+  font-weight: bold;
+  font-size: .75em;
+  text-overflow: ellipsis;
+  border: none;
+  border-radius: 0em;
+  color: #031926;
+}
+

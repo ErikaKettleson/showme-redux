@@ -63,16 +63,18 @@ class App extends Component {
         <Nav />
         <div className="dropdowns-bar">
           <h1>Show Me:</h1>
-          <BrandDropdown value={selectedBrand}
-          onChange={this.handleBrandChange}
-          brands={['Chanel', 'Christian Dior', 'Loewe', 'Dolce & Gabbana']} />
-          <YearDropdown value={selectedYear}
-          onChange={this.handleYearChange}
-          years={[2020, 2019, 2018, 2017, 2016, 2015]} />
-          <SeasonDropdown value={selectedSeason}
-          onChange={this.handleSeasonChange}
-          seasons={['Fall', 'Spring','Pre-Fall', 'Resort', 'Spring Couture', 'Fall Couture']} />
-        </div>
+          <div class="dropdown-selects">
+            <BrandDropdown value={selectedBrand}
+            onChange={this.handleBrandChange}
+            brands={['Chanel', 'Christian Dior', 'Loewe', 'Dolce & Gabbana']} />
+            <YearDropdown value={selectedYear}
+            onChange={this.handleYearChange}
+            years={[2020, 2019, 2018, 2017, 2016, 2015]} />
+            <SeasonDropdown value={selectedSeason}
+            onChange={this.handleSeasonChange}
+            seasons={['Fall', 'Spring','Pre-Fall', 'Resort', 'Spring Couture', 'Fall Couture']} />
+            </div>
+          </div>
         <MyResponsivePie />
       </div>
     )

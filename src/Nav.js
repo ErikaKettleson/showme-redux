@@ -5,31 +5,7 @@ import './Nav.scss';
 function Nav() {
     return (
       <div className="nav-bar">
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
-        <img src={logo} className="nav-logo" alt="logo" />
+
       </div>
     )
   }
