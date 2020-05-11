@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="dropdowns-bar">
-          <h1>Show Me:</h1>
+          <h1>Show Me: {selections.selectedBrand}</h1>
           <div class="dropdown-selects">
             <FilterDropdown
               options={data.brands}
