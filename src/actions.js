@@ -1,4 +1,12 @@
 export const RECEIVE_BRANDS = "RECEIVE_BRANDS";
+export const CHANGE_BRAND = "CHANGE_BRAND";
+
+export function changeBrand(selectedBrand) {
+  return {
+    type: CHANGE_BRAND,
+    selectedBrand,
+  };
+}
 
 export function receiveBrands(brands) {
   return {

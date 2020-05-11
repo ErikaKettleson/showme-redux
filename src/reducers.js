@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { RECEIVE_BRANDS } from "./actions";
+import { RECEIVE_BRANDS, CHANGE_BRAND } from "./actions";
 
 const initialDataState = {
   brands: [],
@@ -29,6 +29,13 @@ function fetchDataReducers(state = initialDataState, action) {
 
 function handleSelectionReducers(state = initialSelectionState, action) {
   switch (action.type) {
+    case CHANGE_BRAND: {
+      const selectedBrand = action.selectedBrand;
+      return {
+        ...state,
+        selectedBrand,
+      };
+    }
     default:
       return state;
   }
