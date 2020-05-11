@@ -5,8 +5,22 @@ import {
     SELECT_YEAR,
     FETCH_YEAR,
     SELECT_SEASON,
-    FETCH_SEASON
+    FETCH_SEASON,
+    RECEIVE_BRANDS
 } from './actions'
+
+function populateBrands(state = {brands: []}, action) {
+    switch(action.type) {
+        case RECEIVE_BRANDS:
+            const brands = action.brands
+            return [
+                ...state,
+                brands
+            ]
+        default:
+            return state
+    }
+}
 
 function selectedBrand(state = '', action) {
     switch (action.type) {
@@ -39,6 +53,7 @@ function selectedSeason(state = '', action) {
 }
 
 const rootReducer = combineReducers({
+    populateBrands,
     selectedBrand,
     selectedYear,
     selectedSeason

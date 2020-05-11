@@ -7,7 +7,8 @@ import {
     selectYear,
     fetchYear,
     selectSeason,
-    fetchSeason
+    fetchSeason,
+    fetchBrands
 } from './actions'
 import './App.scss';
 import Nav from './Nav';
@@ -23,6 +24,11 @@ class App extends Component {
     this.handleBrandChange = this.handleBrandChange.bind(this)
     this.handleYearChange = this.handleYearChange.bind(this)
     this.handleSeasonChange = this.handleSeasonChange.bind(this)
+  }
+
+  componentWillMount() {
+    const { dispatch } = this.props
+    dispatch(fetchBrands())
   }
 
   componentDidUpdate(prevProps) {
@@ -58,7 +64,7 @@ class App extends Component {
 
 
   render() {
-    const { selectedBrand, selectedYear, selectedSeason } = this.props
+    const { brands, selectedBrand, selectedYear, selectedSeason } = this.props
     return (
       <div className="app">
         <Nav />
@@ -67,7 +73,7 @@ class App extends Component {
           <div class="dropdown-selects">
             <BrandDropdown value={selectedBrand}
             onChange={this.handleBrandChange}
-            brands={['Chanel', 'Christian Dior', 'Loewe', 'Dolce & Gabbana']} />
+            brands={brands} />
             <SeasonDropdown value={selectedSeason}
             onChange={this.handleSeasonChange}
             seasons={['Fall', 'Spring','Pre-Fall', 'Resort', 'Spring Couture', 'Fall Couture']} />
@@ -89,9 +95,10 @@ App.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { selectedBrand, selectedYear, selectedSeason } = state
+  const { brands, selectedBrand, selectedYear, selectedSeason } = state
 
   return {
+    brands,
     selectedBrand,
     selectedYear,
     selectedSeason
