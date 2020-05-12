@@ -7,7 +7,7 @@ export const FilterDropdown = ({
   selectedOption,
   onSelectionChange,
 }) => (
-  <div>
+  <span>
     <select
       onChange={(e) => onSelectionChange(e.target.value)}
       value={selectedOption}
@@ -18,7 +18,7 @@ export const FilterDropdown = ({
         </option>
       ))}
     </select>
-  </div>
+  </span>
 );
 
 export default FilterDropdown;

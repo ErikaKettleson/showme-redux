@@ -1,31 +1,58 @@
 import React from 'react'
 import Gallery from 'react-grid-gallery'
 
-const IMAGES =
-[{
-        src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-        thumbnail: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_n.jpg",
-        thumbnailWidth: 320,
-        thumbnailHeight: 174,
-},
-{
-        src: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_b.jpg",
-        thumbnail: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_n.jpg",
-        thumbnailWidth: 320,
-        thumbnailHeight: 212,
-},
 
-{
-        src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-        thumbnail: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_n.jpg",
-        thumbnailWidth: 320,
-        thumbnailHeight: 212
-}]
+function fetchBrand(selectedBrand) {
+        const request = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({"brand_name": [selectedBrand], "year": [2019],  "season": ["fall"]})
+        };
+         fetch(`http://server.local/api/images`, request)
+            .then((response) => response.json())
+            .then((json) => {
+                debugger;
+                let images = json.map(imageUrl => {
+                        return (
+                            {
+                            src: imageUrl,
+                            thumbnail: imageUrl,
+                            thumbnailWidth: 174,
+                            thumbnailHeight: 320,
+                            }
+                        );
+                    });
+                return images;
+                // return json.map(imageUrl => {
+                //     return (
+                //         {
+                //         src: imageUrl,
+                //         thumbnail: imageUrl,
+                //         thumbnailWidth: 174,
+                //         thumbnailHeight: 320,
+                //         }
+                //     );
+                // });
+            });
+        }
 
-function DisplayImages() {
-    return(
-        <Gallery images={IMAGES}/>
-    )
-}
+export const DisplayImages = async ({
+        brand,
+        }) => {
+        const images =
+            [{
+                src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
+                thumbnail: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_n.jpg",
+                thumbnailWidth: 320,
+                thumbnailHeight: 174,
+            }]
+        if (brand) {
+            const images = fetchBrand(brand);
+            return <Gallery images={images} />
+        } else {
+            return <Gallery images={images} />
+        }
+        // return <Gallery images={images} />
+    };
 
 export default DisplayImages;
