@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchBrands, changeBrand, changeYear, changeSeason } from "./actions";
 import "./App.scss";
 import MyResponsivePie from "./components/ResponsivePie/ResponsivePie";
-import DisplayImages from "./components/DisplayImages/DisplayImages";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 import FilterDropdown from "./components/FilterDropdown/FilterDropdown";
 
 class App extends Component {
@@ -47,7 +47,7 @@ class App extends Component {
             />
           </div>
         </div>
-        <DisplayImages brand={selections.selectedBrand} />
+        <ImageGallery selectedBrand={selections.selectedBrand} />
       </div>
     );
   }
