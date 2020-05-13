@@ -15,9 +15,9 @@ const initialDataState = {
 };
 
 const initialSelectionState = {
-  selectedBrands: null,
-  selectedYears: null,
-  selectedSeasons: null,
+  selectedBrands: [],
+  selectedYears: [],
+  selectedSeasons: [],
 };
 
 function fetchDataReducers(state = initialDataState, action) {

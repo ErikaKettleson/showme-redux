@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./FilterDropdown.scss";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    maxWidth: 300
+    maxWidth: 400
   },
   chips: {
     display: 'flex',
@@ -70,11 +70,6 @@ const FilterDropdown = ({
     onSelectionChange
   }) => {
     const classes = useStyles();
-    // const [dropdownOption, setDropdownOption] = React.useState([]);
-
-    // const onSelectionChange = (event) => {
-    //   setDropdownOption(event.target.value);
-    // };
 
     return (
       <span>
@@ -104,10 +99,3 @@ const FilterDropdown = ({
   }
 
 export default FilterDropdown;
-
-
-// FilterDropdown.propTypes = {
-//   values: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   selectedIndex: PropTypes.number.isRequired,
-//   onSelectionChange: PropTypes.func.isRequired,
-// };
