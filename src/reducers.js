@@ -1,5 +1,12 @@
 import { combineReducers } from "redux";
-import { RECEIVE_BRANDS, CHANGE_BRAND, CHANGE_SEASON, CHANGE_YEAR } from "./actions";
+import {
+  RECEIVE_BRANDS,
+  CHANGE_BRAND,
+  CHANGE_SEASON,
+  CHANGE_YEAR,
+  RECEIVE_YEARS,
+  RECEIVE_SEASONS,
+} from "./actions";
 
 const initialDataState = {
   brands: [],
@@ -22,6 +29,20 @@ function fetchDataReducers(state = initialDataState, action) {
         brands,
       };
     }
+    case RECEIVE_YEARS: {
+      const years = action.years;
+      return {
+        ...state,
+        years,
+      };
+    }
+    case RECEIVE_SEASONS: {
+      const seasons = action.seasons;
+      return {
+        ...state,
+        seasons,
+      };
+    }
     default:
       return state;
   }
@@ -30,28 +51,28 @@ function fetchDataReducers(state = initialDataState, action) {
 function handleSelectionReducers(state = initialSelectionState, action) {
   switch (action.type) {
     case CHANGE_BRAND: {
-        const selectedBrand = action.selectedBrand;
-        return {
+      const selectedBrand = action.selectedBrand;
+      return {
         ...state,
         selectedBrand,
-        };
+      };
     }
     case CHANGE_YEAR: {
-        const selectedYear = action.selectedYear
-        return {
-            ...state,
-            selectedYear
-        }
+      const selectedYear = action.selectedYear;
+      return {
+        ...state,
+        selectedYear,
+      };
     }
     case CHANGE_SEASON: {
-        const selectedSeason = action.selectedSeason
-        return {
-            ...state,
-            selectedSeason
-        }
+      const selectedSeason = action.selectedSeason;
+      return {
+        ...state,
+        selectedSeason,
+      };
     }
     default:
-        return state;
+      return state;
   }
 }
 

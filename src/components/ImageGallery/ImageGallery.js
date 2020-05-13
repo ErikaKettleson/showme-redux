@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Gallery from "react-grid-gallery";
 
-const ImageGallery = ({ selectedBrand }) => {
+const ImageGallery = ({ selectedBrand, selectedYear, selectedSeason }) => {
   const [images, setImages] = useState([]);
 
   const processImageJson = (json) => {
@@ -16,14 +16,14 @@ const ImageGallery = ({ selectedBrand }) => {
   };
 
   useEffect(() => {
-    async function fetchData(selectedBrand) {
+    async function fetchData(selectedBrand, selectedYear, selectedSeason) {
       const request = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           brand_name: [selectedBrand],
-          year: [2019],
-          season: ["fall"],
+          year: [selectedYear],
+          season: [selectedSeason],
         }),
       };
       const response = await fetch(`http://server.local/api/images`, request);
@@ -34,8 +34,8 @@ const ImageGallery = ({ selectedBrand }) => {
         .catch((err) => console.log(err));
     }
 
-    fetchData(selectedBrand);
-  }, [selectedBrand]);
+    fetchData(selectedBrand, selectedYear, selectedSeason);
+  }, [selectedBrand, selectedYear, selectedSeason]);
 
   return <Gallery images={images} />;
 };

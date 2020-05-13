@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchBrands, changeBrand, changeYear, changeSeason } from "./actions";
+import {
+  fetchBrands,
+  fetchYears,
+  fetchSeasons,
+  changeBrand,
+  changeYear,
+  changeSeason,
+} from "./actions";
 import "./App.scss";
 import MyResponsivePie from "./components/ResponsivePie/ResponsivePie";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
@@ -9,6 +16,8 @@ import FilterDropdown from "./components/FilterDropdown/FilterDropdown";
 class App extends Component {
   componentDidMount() {
     this.props.fetchBrands();
+    this.props.fetchYears();
+    this.props.fetchSeasons();
   }
 
   render() {
@@ -36,18 +45,22 @@ class App extends Component {
               onSelectionChange={handleBrandChange}
             />
             <FilterDropdown
-              options={["Fall", "Spring"]}
+              options={data.seasons}
               selectedOption={selections.selectedSeason}
               onSelectionChange={handleSeasonChange}
             />
             <FilterDropdown
-              options={[2020, 2019, 2018, 2017, 2016, 2015]}
+              options={data.years}
               selectedOption={selections.selectedYear}
               onSelectionChange={handleYearChange}
             />
           </div>
         </div>
-        <ImageGallery selectedBrand={selections.selectedBrand} />
+        <ImageGallery
+          selectedBrand={selections.selectedBrand}
+          selectedYear={selections.selectedYear}
+          selectedSeason={selections.selectedSeason}
+        />
       </div>
     );
   }
@@ -58,6 +71,12 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     fetchBrands() {
       dispatch(fetchBrands());
+    },
+    fetchYears() {
+      dispatch(fetchYears());
+    },
+    fetchSeasons() {
+      dispatch(fetchSeasons());
     },
     handleBrandChange(selectedBrand) {
       dispatch(changeBrand(selectedBrand));
