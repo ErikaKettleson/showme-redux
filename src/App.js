@@ -34,32 +34,32 @@ class App extends Component {
           <div className="title-selects">
             <h1>Show Me: </h1>
             <h2>
-              {selections.selectedBrand} {selections.selectedSeason}{" "}
-              {selections.selectedYear}
+              {selections.selectedBrands} {selections.selectedSeasons}{" "}
+              {selections.selectedYears}
             </h2>
           </div>
           <div className="dropdown-selects">
             <FilterDropdown
               options={data.brands}
-              selectedOption={selections.selectedBrand}
+              selectedOptions={selections.selectedBrands}
               onSelectionChange={handleBrandChange}
             />
             <FilterDropdown
               options={data.seasons}
-              selectedOption={selections.selectedSeason}
+              selectedOptions={selections.selectedSeasons}
               onSelectionChange={handleSeasonChange}
             />
             <FilterDropdown
               options={data.years}
-              selectedOption={selections.selectedYear}
+              selectedOptions={selections.selectedYears}
               onSelectionChange={handleYearChange}
             />
           </div>
         </div>
         <ImageGallery
-          selectedBrand={selections.selectedBrand}
-          selectedYear={selections.selectedYear}
-          selectedSeason={selections.selectedSeason}
+          selectedBrand={selections.selectedBrands}
+          selectedYear={selections.selectedYears}
+          selectedSeason={selections.selectedSeasons}
         />
       </div>
     );
@@ -78,14 +78,14 @@ function mapDispatchToProps(dispatch) {
     fetchSeasons() {
       dispatch(fetchSeasons());
     },
-    handleBrandChange(selectedBrand) {
-      dispatch(changeBrand(selectedBrand));
+    handleBrandChange(selectedBrands) {
+      dispatch(changeBrand(selectedBrands));
     },
-    handleSeasonChange(selectedSeason) {
-      dispatch(changeSeason(selectedSeason));
+    handleSeasonChange(selectedSeasons) {
+      dispatch(changeSeason(selectedSeasons));
     },
-    handleYearChange(selectedYear) {
-      dispatch(changeYear(selectedYear));
+    handleYearChange(selectedYears) {
+      dispatch(changeYear(selectedYears));
     },
   };
 }

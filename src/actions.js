@@ -6,24 +6,24 @@ export const CHANGE_BRAND = "CHANGE_BRAND";
 export const CHANGE_YEAR = "CHANGE_YEAR";
 export const CHANGE_SEASON = "CHANGE_SEASON";
 
-export function changeBrand(selectedBrand) {
+export function changeBrand(selectedBrands) {
   return {
     type: CHANGE_BRAND,
-    selectedBrand,
+    selectedBrands,
   };
 }
 
-export function changeYear(selectedYear) {
+export function changeYear(selectedYears) {
   return {
     type: CHANGE_YEAR,
-    selectedYear,
+    selectedYears,
   };
 }
 
-export function changeSeason(selectedSeason) {
+export function changeSeason(selectedSeasons) {
   return {
     type: CHANGE_SEASON,
-    selectedSeason,
+    selectedSeasons,
   };
 }
 

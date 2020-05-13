@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Gallery from "react-grid-gallery";
 
-const ImageGallery = ({ selectedBrand, selectedYear, selectedSeason }) => {
+const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   const [images, setImages] = useState([]);
 
   const processImageJson = (json) => {
@@ -9,21 +9,21 @@ const ImageGallery = ({ selectedBrand, selectedYear, selectedSeason }) => {
       return {
         src: imageUrl,
         thumbnail: imageUrl,
-        thumbnailWidth: 174,
-        thumbnailHeight: 320,
+        thumbnailWidth: 209,
+        thumbnailHeight: 314,
       };
     });
   };
 
   useEffect(() => {
-    async function fetchData(selectedBrand, selectedYear, selectedSeason) {
+    async function fetchData(selectedBrands, selectedYears, selectedSeasons) {
       const request = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          brand_name: [selectedBrand],
-          year: [selectedYear],
-          season: [selectedSeason],
+          brand_name: [selectedBrands],
+          year: [selectedYears],
+          season: [selectedSeasons],
         }),
       };
       const response = await fetch(`http://server.local/api/images`, request);
@@ -34,8 +34,8 @@ const ImageGallery = ({ selectedBrand, selectedYear, selectedSeason }) => {
         .catch((err) => console.log(err));
     }
 
-    fetchData(selectedBrand, selectedYear, selectedSeason);
-  }, [selectedBrand, selectedYear, selectedSeason]);
+    fetchData(selectedBrands, selectedYears, selectedSeasons);
+  }, [selectedBrands, selectedYears, selectedSeasons]);
 
   return <Gallery images={images} />;
 };

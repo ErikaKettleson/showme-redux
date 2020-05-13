@@ -15,9 +15,9 @@ const initialDataState = {
 };
 
 const initialSelectionState = {
-  selectedBrand: null,
-  selectedYear: null,
-  selectedSeason: null,
+  selectedBrands: null,
+  selectedYears: null,
+  selectedSeasons: null,
 };
 
 function fetchDataReducers(state = initialDataState, action) {
@@ -51,24 +51,24 @@ function fetchDataReducers(state = initialDataState, action) {
 function handleSelectionReducers(state = initialSelectionState, action) {
   switch (action.type) {
     case CHANGE_BRAND: {
-      const selectedBrand = action.selectedBrand;
+      const selectedBrands = action.selectedBrands;
       return {
         ...state,
-        selectedBrand,
+        selectedBrands,
       };
     }
     case CHANGE_YEAR: {
-      const selectedYear = action.selectedYear;
+      const selectedYears = action.selectedYears;
       return {
         ...state,
-        selectedYear,
+        selectedYears,
       };
     }
     case CHANGE_SEASON: {
-      const selectedSeason = action.selectedSeason;
+      const selectedSeasons = action.selectedSeasons;
       return {
         ...state,
-        selectedSeason,
+        selectedSeasons,
       };
     }
     default:
