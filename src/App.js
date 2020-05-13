@@ -57,9 +57,9 @@ class App extends Component {
           </div>
         </div>
         <ImageGallery
-          selectedBrand={selections.selectedBrands}
-          selectedYear={selections.selectedYears}
-          selectedSeason={selections.selectedSeasons}
+          selectedBrands={selections.selectedBrands}
+          selectedYears={selections.selectedYears}
+          selectedSeasons={selections.selectedSeasons}
         />
       </div>
     );

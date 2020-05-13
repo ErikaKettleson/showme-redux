@@ -21,9 +21,9 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          brand_name: [selectedBrands],
-          year: [selectedYears],
-          season: [selectedSeasons],
+          brand_name: selectedBrands,
+          year: selectedYears,
+          season: selectedSeasons,
         }),
       };
       const response = await fetch(`http://server.local/api/images`, request);
