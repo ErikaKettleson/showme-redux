@@ -1,6 +1,6 @@
 .app {
   .dropdowns-bar {
-    height: 15vh;
+    height: 20vh;
     background-color: #dbcfb0;
     display: flex;
     align-items: center;
@@ -8,12 +8,17 @@
     justify-content: space-around;
     width: 100vw;
   }
+  .dropdown-selects {
+    width: 53vw;
+    margin-right: 1vw;
+  }
 
   .title-selects {
     display: flex;
     justify-content: left;
     flex-direction: column;
     width: 45vw;
+    margin-left: 1vw;
     h1 {
       color: white;
       font-family: Futura;
@@ -21,14 +26,23 @@
       text-shadow: 7px 7px 0px #031926;
       margin-bottom: 0;
     }
-    h2 {
-      color: #031926;
-      font-family: Futura;
-      text-transform: capitalize;
-    }
+  }
+
+  .selection-label {
+    color: #031926;
+    font-family: Futura;
+    text-transform: capitalize;
+    margin-left: .25em;
+      .brand-text:empty,
+      .season-text:empty,
+      .year-text:empty {
+        display: none;
+      }
+      .brand-text:not(:first-child):before,
+      .season-text:not(:first-child):before,
+      .year-text:not(:first-child):before {
+        content: " & ";
+      }
   }
 }
 
-.brandText {
-  word-spacing: 10px;
-}

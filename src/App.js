@@ -13,9 +13,9 @@ import MyResponsivePie from "./components/ResponsivePie/ResponsivePie";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import FilterDropdown from "./components/FilterDropdown/FilterDropdown";
 
-const formatLabel = (labels) => (
+const formatLabel = (labels, className) => (
   labels.map((label) => (
-    <span className="brandText">{label}</span>
+    <span className={className}>{label}</span>
   ))
 )
 
@@ -39,11 +39,11 @@ class App extends Component {
         <div className="dropdowns-bar">
           <div className="title-selects">
             <h1>Show Me: </h1>
-            <h2>
-              {formatLabel(selections.selectedBrands)}
-              {formatLabel(selections.selectedSeasons)}
-              {formatLabel(selections.selectedYears)} 
-            </h2>
+            <p className="selection-label">
+              <div>{formatLabel(selections.selectedBrands, "brand-text")}</div>
+              <div>{formatLabel(selections.selectedSeasons, "season-text")}</div>
+              <div>{formatLabel(selections.selectedYears, "year-text")}</div>
+            </p>
           </div>
           <div className="dropdown-selects">
             <FilterDropdown
