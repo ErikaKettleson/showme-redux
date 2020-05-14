@@ -1,20 +1,5 @@
 
-.dropdown-selects {
-  display: flex;
-  justify-content: space-around;
-  width: 45vw;
 
-}
-
-select {
-  width: 15vw;
-  height: 5vh;
-  background-color: white;
-  font-weight: bold;
-  font-size: .75em;
-  text-overflow: ellipsis;
-  border: none;
-  border-radius: 0em;
-  color: #031926;
-  margin: .25em;
+.MuiChip-label, .MuiListItem-button {
+  text-transform: capitalize;
 }

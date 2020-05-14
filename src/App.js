@@ -13,6 +13,12 @@ import MyResponsivePie from "./components/ResponsivePie/ResponsivePie";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import FilterDropdown from "./components/FilterDropdown/FilterDropdown";
 
+const formatLabel = (labels) => (
+  labels.map((label) => (
+    <span className="brandText">{label}</span>
+  ))
+)
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchBrands();
@@ -34,8 +40,9 @@ class App extends Component {
           <div className="title-selects">
             <h1>Show Me: </h1>
             <h2>
-              {selections.selectedBrands} {selections.selectedSeasons}{" "}
-              {selections.selectedYears}
+              {formatLabel(selections.selectedBrands)}
+              {formatLabel(selections.selectedSeasons)}
+              {formatLabel(selections.selectedYears)} 
             </h2>
           </div>
           <div className="dropdown-selects">
@@ -43,16 +50,19 @@ class App extends Component {
               options={data.brands}
               selectedOptions={selections.selectedBrands}
               onSelectionChange={handleBrandChange}
+              label="Brands"
             />
             <FilterDropdown
               options={data.seasons}
               selectedOptions={selections.selectedSeasons}
               onSelectionChange={handleSeasonChange}
+              label="Seasons"
             />
             <FilterDropdown
               options={data.years}
               selectedOptions={selections.selectedYears}
               onSelectionChange={handleYearChange}
+              label="Years"
             />
           </div>
         </div>

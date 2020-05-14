@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   chips: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   chip: {
     margin: 2
@@ -67,16 +67,17 @@ const MenuProps = {
 const FilterDropdown = ({
     options,
     selectedOptions,
-    onSelectionChange
+    onSelectionChange,
+    label
   }) => {
     const classes = useStyles();
 
     return (
       <span>
         <FormControl className={classes.formControl}>
-        <InputLabel>Label</InputLabel>
+        <InputLabel>{label}</InputLabel>
           <Select
-            multiple value={[options[0]]}
+            multiple value={selectedOptions}
             onChange={(e) => onSelectionChange(e.target.value)}
             renderValue={(selectedOptions) => (
               <div className={classes.chips}>
