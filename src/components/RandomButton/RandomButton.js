@@ -10,32 +10,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-// const chooseRandomShow = (brands, seasons, years) => {
-//     debugger;
-//     if (brands.length) {
-//     const randomBrand = brands[Math.floor(Math.random() * brands.length)];
-//     const randomYear = years[Math.floor(Math.random() * years.length)];
-//     const randomSeason = seasons[Math.floor(Math.random() * seasons.length)];
-//     return ({randomBrand, randomSeason, randomYear})
-//     }
-//   };
-
-
 const RandomButton = ({
-    onSelectionChange,
-    // brands,
-    // seasons,
-    // years,
-    selectedOptions
+    onButtonClick,
 }) => {
     const classes= useStyles();
-    // const randomShow = chooseRandomShow(brands, seasons, years);
-
     return (
         <div className={classes.root}>
             <Button
                 variant="outlined"
-                onClick={(e) => onSelectionChange()}>
+                onClick={(e) => onButtonClick()}>
                 Random
             </Button>
         </div>

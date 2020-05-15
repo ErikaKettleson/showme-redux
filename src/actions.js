@@ -55,12 +55,20 @@ export function receiveSeasons(seasons) {
   };
 }
 
-export function setMultiple({selectedBrands, selectedYears, selectedSeasons}) {
+// export function setMultiple({selectedBrands, selectedYears, selectedSeasons}) {
+//   return (dispatch) => {
+//     dispatch(changeBrand(selectedBrands));
+//     dispatch(changeSeason(selectedSeasons));
+//     dispatch(changeYear(selectedYears));
+//   }
+// }
+
+export function setMultiple(actions) {
   return (dispatch) => {
-    dispatch(changeBrand(selectedBrands));
-    dispatch(changeSeason(selectedSeasons));
-    dispatch(changeYear(selectedYears));
-  }
+    dispatch(changeBrand(actions.selectedBrands));
+    dispatch(changeSeason(actions.selectedSeasons));
+    dispatch(changeYear(actions.selectedYears));
+  };
 }
 
 export function fetchBrands() {

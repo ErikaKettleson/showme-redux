@@ -22,10 +22,9 @@ const formatLabel = (labels=[], className) => (
 )
 
 const randomShow = (data) => {
-  debugger;
-  const selectedBrands = data.brands[Math.floor(Math.random() * data.brands.length)];
-  const selectedYears = data.years[Math.floor(Math.random() * data.years.length)];
-  const selectedSeasons = data.seasons[Math.floor(Math.random() * data.seasons.length)];
+  const selectedBrands = [data.brands[Math.floor(Math.random() * data.brands.length)]];
+  const selectedYears = [data.years[Math.floor(Math.random() * data.years.length)]];
+  const selectedSeasons = [data.seasons[Math.floor(Math.random() * data.seasons.length)]];
    return ({selectedBrands, selectedSeasons, selectedYears})
 }
 
@@ -34,11 +33,6 @@ class App extends Component {
     this.props.fetchBrands();
     this.props.fetchYears();
     this.props.fetchSeasons();
-    this.props.setMultiple({
-      selectedBrands: this.props.data.brands[0],
-      selectedSeasons: this.props.data.seasons[0],
-      selectedYears:this.props.data.years[0],
-    })
   }
 
   render() {
@@ -48,7 +42,7 @@ class App extends Component {
       handleBrandChange,
       handleSeasonChange,
       handleYearChange,
-      handleRandomButton
+      setRandomSelections
     } = this.props;
     return (
       <div className="app">
@@ -81,11 +75,7 @@ class App extends Component {
               label="Years"
             />
             <RandomButton
-              // brands={data.brands}
-              // seasons={data.seasons}
-              // years={data.years}
-              selectedOptions={randomShow(data)}
-              onSelectionChange={setMultiple}
+              onButtonClick={setRandomSelections}
             />
           </div>
         </div>
@@ -135,4 +125,12 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+function mergeProps(propsFromState, propsFromDispatch, ownProps) {
+  return {
+    setRandomSelections: () => propsFromDispatch.setMultiple(randomShow(propsFromState.data)),
+    ...propsFromState,
+    ...propsFromDispatch,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App);
