@@ -1,7 +1,7 @@
 export const RECEIVE_BRANDS = "RECEIVE_BRANDS";
 export const RECEIVE_YEARS = "RECEIVE_YEARS";
 export const RECEIVE_SEASONS = "RECEIVE_SEASONS";
-
+export const CHANGE_RANDOM = "CHANGE_RANDOM";
 export const CHANGE_BRAND = "CHANGE_BRAND";
 export const CHANGE_YEAR = "CHANGE_YEAR";
 export const CHANGE_SEASON = "CHANGE_SEASON";
@@ -27,6 +27,13 @@ export function changeSeason(selectedSeasons) {
   };
 }
 
+export function changeRandom(selectedOptions) {
+  return {
+    type: CHANGE_RANDOM,
+    selectedOptions,
+  };
+}
+
 export function receiveBrands(brands) {
   return {
     type: RECEIVE_BRANDS,
@@ -46,6 +53,14 @@ export function receiveSeasons(seasons) {
     type: RECEIVE_SEASONS,
     seasons,
   };
+}
+
+export function setMultiple({selectedBrands, selectedYears, selectedSeasons}) {
+  return (dispatch) => {
+    dispatch(changeBrand(selectedBrands));
+    dispatch(changeSeason(selectedSeasons));
+    dispatch(changeYear(selectedYears));
+  }
 }
 
 export function fetchBrands() {

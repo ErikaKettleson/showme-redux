@@ -8,33 +8,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 
-// export const FilterDropdown = ({
-//   options,
-//   selectedOption,
-//   onSelectionChange,
-// }) => (
-//   <span>
-//     <select
-//       onChange={(e) => onSelectionChange(e.target.value)}
-//       value={selectedOption}
-//     >
-//       {options.map((option) => (
-//         <option value={option} key={option}>
-//           {option}
-//         </option>
-//       ))}
-//     </select>
-//   </span>
-// );
-
-// export default FilterDropdown;
-
-// FilterDropdown.propTypes = {
-//   values: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   selectedIndex: PropTypes.number.isRequired,
-//   onSelectionChange: PropTypes.func.isRequired,
-// };
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),

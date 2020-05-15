@@ -7,23 +7,38 @@ import {
   changeBrand,
   changeYear,
   changeSeason,
+  setMultiple
 } from "./actions";
 import "./App.scss";
 import MyResponsivePie from "./components/ResponsivePie/ResponsivePie";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import FilterDropdown from "./components/FilterDropdown/FilterDropdown";
+import RandomButton from "./components/RandomButton/RandomButton";
 
-const formatLabel = (labels, className) => (
+const formatLabel = (labels=[], className) => (
   labels.map((label) => (
     <span className={className}>{label}</span>
   ))
 )
+
+const randomShow = (data) => {
+  debugger;
+  const selectedBrands = data.brands[Math.floor(Math.random() * data.brands.length)];
+  const selectedYears = data.years[Math.floor(Math.random() * data.years.length)];
+  const selectedSeasons = data.seasons[Math.floor(Math.random() * data.seasons.length)];
+   return ({selectedBrands, selectedSeasons, selectedYears})
+}
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchBrands();
     this.props.fetchYears();
     this.props.fetchSeasons();
+    this.props.setMultiple({
+      selectedBrands: this.props.data.brands[0],
+      selectedSeasons: this.props.data.seasons[0],
+      selectedYears:this.props.data.years[0],
+    })
   }
 
   render() {
@@ -33,17 +48,18 @@ class App extends Component {
       handleBrandChange,
       handleSeasonChange,
       handleYearChange,
+      handleRandomButton
     } = this.props;
     return (
       <div className="app">
         <div className="dropdowns-bar">
           <div className="title-selects">
             <h1>Show Me: </h1>
-            <p className="selection-label">
+            <span className="selection-label">
               <div>{formatLabel(selections.selectedBrands, "brand-text")}</div>
               <div>{formatLabel(selections.selectedSeasons, "season-text")}</div>
               <div>{formatLabel(selections.selectedYears, "year-text")}</div>
-            </p>
+            </span>
           </div>
           <div className="dropdown-selects">
             <FilterDropdown
@@ -63,6 +79,13 @@ class App extends Component {
               selectedOptions={selections.selectedYears}
               onSelectionChange={handleYearChange}
               label="Years"
+            />
+            <RandomButton
+              // brands={data.brands}
+              // seasons={data.seasons}
+              // years={data.years}
+              selectedOptions={randomShow(data)}
+              onSelectionChange={setMultiple}
             />
           </div>
         </div>
@@ -97,6 +120,9 @@ function mapDispatchToProps(dispatch) {
     handleYearChange(selectedYears) {
       dispatch(changeYear(selectedYears));
     },
+    setMultiple(selectedOptions) {
+      dispatch(setMultiple(selectedOptions))
+    }
   };
 }
 

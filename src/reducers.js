@@ -6,6 +6,7 @@ import {
   CHANGE_YEAR,
   RECEIVE_YEARS,
   RECEIVE_SEASONS,
+  CHANGE_RANDOM,
 } from "./actions";
 
 const initialDataState = {
@@ -69,6 +70,13 @@ function handleSelectionReducers(state = initialSelectionState, action) {
       return {
         ...state,
         selectedSeasons,
+      };
+    }
+    case CHANGE_RANDOM: {
+      const selectedOptions = action.selectedOptions;
+      return {
+        ...state,
+        selectedOptions,
       };
     }
     default:
