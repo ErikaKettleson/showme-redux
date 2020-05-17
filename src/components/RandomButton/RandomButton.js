@@ -19,7 +19,7 @@ const RandomButton = ({
             <Button
                 variant="outlined"
                 onClick={(e) => onButtonClick()}>
-                Random
+                Random Show
             </Button>
         </div>
     )
