@@ -8,7 +8,7 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
     return json.map((imageUrl) => {
       return {
         src: imageUrl,
-        thumbnail: imageUrl,
+        thumbnail: imageUrl + ".thumb",
         thumbnailWidth: 209,
         thumbnailHeight: 314,
       };
