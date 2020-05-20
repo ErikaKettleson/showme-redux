@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Gallery from "react-grid-gallery";
+import PaletteButton from "../PaletteButton/PaletteButton";
+
 
 const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   const [images, setImages] = useState([]);
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const getImagePalette = () => {
+    alert(images[currentImage].thumbnail);
+  };
+
 
   const processImageJson = (json) => {
     return json.map((imageUrl) => {
@@ -37,7 +45,18 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
     fetchData(selectedBrands, selectedYears, selectedSeasons);
   }, [selectedBrands, selectedYears, selectedSeasons]);
 
-  return <Gallery images={images} />;
+  return (
+        <Gallery
+            images={images}
+            currentImageWillChange={setCurrentImage}
+
+            customControls={[
+              <PaletteButton
+                onButtonClick={getImagePalette}
+              />
+            ]}
+        />
+  )
 };
 
 export default ImageGallery;
