@@ -18,16 +18,10 @@ const SimplePopper = ({
 }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [openPopper, setOpenPopper] = React.useState(null);
 
     const setAnchor = (event) => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
-        setOpenPopper((prev) => !prev);
     };
-
-    const handleClickAway = () => {
-        setOpenPopper(false);
-    }
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popper' : undefined;
@@ -47,7 +41,6 @@ const SimplePopper = ({
                 }}>
                 Show Palette
             </Button>
-            <ClickAwayListener onClickAway={handleClickAway}>
                 <Popper
                     id={id}
                     open={open}
@@ -57,7 +50,6 @@ const SimplePopper = ({
                         {content}
                     </div>
                 </Popper>
-            </ClickAwayListener>
         </div>
     );
 }
