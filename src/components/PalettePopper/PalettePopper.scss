@@ -1,5 +1,24 @@
 #simple-popper {
     z-index: 2001;
     font-family: "futura";
-    width: 140px;
+    width: 16.5vw;
+
+    div {
+        height: 32vh;
+        width: 16.5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1vh 0 0 0 ;
+        margin: 0;
+        border: 0;
+        background-color:rgba(255, 255, 255, 0.0);
+
+        div {
+            height: 2.5vh;
+            font-size: .75em;
+            width: 16.5vw;
+        }
+    }
 }
+
