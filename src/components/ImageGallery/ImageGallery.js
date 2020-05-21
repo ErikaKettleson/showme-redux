@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Gallery from "react-grid-gallery";
-import PaletteButton from "../PaletteButton/PaletteButton";
-
+import PalettePopper from "../PalettePopper/PalettePopper";
+import {red} from "@material-ui/core/colors";
 
 const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
+  const [imagePalette, setImagePalette] = useState([]);
 
   const getImagePalette = () => {
-    alert(images[currentImage].thumbnail);
+    console.log(images[currentImage].thumbnail);
+    // temp mock palette
+    const imagePalette = ["#EEF0EF", "#808080", "#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#581845"]
+    setImagePalette(imagePalette);
   };
 
+  const formatImagePalette = (imagePalette, color) => {
+    return imagePalette.map((color) => (
+      <div style={{backgroundColor: color}}>{color}</div>
+    ))
+  }
 
   const processImageJson = (json) => {
     return json.map((imageUrl) => {
@@ -51,8 +60,9 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
             currentImageWillChange={setCurrentImage}
 
             customControls={[
-              <PaletteButton
+              <PalettePopper
                 onButtonClick={getImagePalette}
+                content={formatImagePalette(imagePalette)}
               />
             ]}
         />

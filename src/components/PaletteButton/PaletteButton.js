@@ -18,8 +18,9 @@ const PaletteButton = ({
         <div className={classes.root}>
             <Button
                 variant="contained"
+                size="small"
                 onClick={(e) => onButtonClick()}>
-                Show Look Palette
+                Show Palette
             </Button>
         </div>
     )
