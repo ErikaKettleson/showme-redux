@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Gallery from "react-grid-gallery";
-import PalettePopper from "../PalettePopper/PalettePopper";
-import { red } from "@material-ui/core/colors";
+import "./ImageGallery.scss";
 
 const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   const [images, setImages] = useState([]);
@@ -10,7 +8,7 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
 
   const imagesGrid = (images) => {
     return images.map((imageUrl) => (
-      <div>
+      <div className="thumbnail-image">
         <img src={imageUrl + ".thumb"} />
       </div>
     ));
@@ -72,19 +70,18 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   }, [selectedBrands, selectedYears, selectedSeasons]);
 
   return (
-    // <Gallery
-    //   images={images}
-    //   currentImageWillChange={setCurrentImage}
-    //   customControls={[
-    //     <PalettePopper
-    //       onButtonClick={getImagePalette}
-    //       content={formatImagePalette(imagePalette)}
-    //     />,
-    //   ]}
-    // />
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div className="image-grid">
       {imagesGrid(images)}
-    </div>
+      <div className="image-placeholder"></div>
+      <div className="image-placeholder"></div>
+      <div className="image-placeholder"></div>
+      <div className="image-placeholder"></div>
+      <div className="image-placeholder"></div>
+      <div className="image-placeholder"></div>
+      <div className="image-placeholder"></div>
+      <div className="image-placeholder"></div>
+      <div className="image-placeholder"></div>
+      </div>
   );
 };
 
