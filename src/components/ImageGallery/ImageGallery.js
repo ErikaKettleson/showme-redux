@@ -1,25 +1,42 @@
 import React, { useState, useEffect } from "react";
 import Gallery from "react-grid-gallery";
 import PalettePopper from "../PalettePopper/PalettePopper";
-import {red} from "@material-ui/core/colors";
+import { red } from "@material-ui/core/colors";
 
 const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
   const [imagePalette, setImagePalette] = useState([]);
 
+  const imagesGrid = (images) => {
+    return images.map((imageUrl) => (
+      <div>
+        <img src={imageUrl + ".thumb"} />
+      </div>
+    ));
+  };
+
   const getImagePalette = () => {
     console.log(images[currentImage].thumbnail);
     // temp mock palette
-    const imagePalette = ["#EEF0EF", "#808080", "#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#581845"]
+    const imagePalette = [
+      "#EEF0EF",
+      "#808080",
+      "#DAF7A6",
+      "#FFC300",
+      "#FF5733",
+      "#C70039",
+      "#900C3F",
+      "#581845",
+    ];
     setImagePalette(imagePalette);
   };
 
   const formatImagePalette = (imagePalette, color) => {
     return imagePalette.map((color) => (
-      <div style={{backgroundColor: color}}>{color}</div>
-    ))
-  }
+      <div style={{ backgroundColor: color }}>{color}</div>
+    ));
+  };
 
   const processImageJson = (json) => {
     return json.map((imageUrl) => {
@@ -46,8 +63,8 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
       const response = await fetch(`http://server.local/api/images`, request);
       response
         .json()
-        .then((json) => processImageJson(json))
-        .then((processedJson) => setImages(processedJson))
+        .then((json) => setImages(json))
+        // .then((processedJson) => setImages(processedJson))
         .catch((err) => console.log(err));
     }
 
@@ -55,18 +72,20 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   }, [selectedBrands, selectedYears, selectedSeasons]);
 
   return (
-        <Gallery
-            images={images}
-            currentImageWillChange={setCurrentImage}
-
-            customControls={[
-              <PalettePopper
-                onButtonClick={getImagePalette}
-                content={formatImagePalette(imagePalette)}
-              />
-            ]}
-        />
-  )
+    // <Gallery
+    //   images={images}
+    //   currentImageWillChange={setCurrentImage}
+    //   customControls={[
+    //     <PalettePopper
+    //       onButtonClick={getImagePalette}
+    //       content={formatImagePalette(imagePalette)}
+    //     />,
+    //   ]}
+    // />
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
+      {imagesGrid(images)}
+    </div>
+  );
 };
 
 export default ImageGallery;
