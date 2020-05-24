@@ -1,108 +1,136 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
-    selectBrand,
-    fetchBrand,
-    selectYear,
-    fetchYear,
-    selectSeason,
-    fetchSeason,
-    fetchBrands
-} from './actions'
-import './App.scss';
-import Nav from './Nav';
-import MyResponsivePie from './ResponsivePie';
-import YearDropdown from './YearDropdown';
-import SeasonDropdown from './SeasonDropdown';
-import BrandDropdown from './BrandDropdown';
-import DisplayImages from './DisplayImages';
+  fetchBrands,
+  fetchYears,
+  fetchSeasons,
+  changeBrand,
+  changeYear,
+  changeSeason,
+  setMultiple
+} from "./actions";
+import "./App.scss";
+import MyResponsivePie from "./components/ResponsivePie/ResponsivePie";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
+import FilterDropdown from "./components/FilterDropdown/FilterDropdown";
+import RandomButton from "./components/RandomButton/RandomButton";
+
+const formatLabel = (labels=[], className) => (
+  labels.map((label) => (
+    <span className={className}>{label}</span>
+  ))
+)
+
+const randomShow = (data) => {
+  const selectedBrands = [data.brands[Math.floor(Math.random() * data.brands.length)]];
+  const selectedYears = [data.years[Math.floor(Math.random() * data.years.length)]];
+  const selectedSeasons = [data.seasons[Math.floor(Math.random() * data.seasons.length)]];
+   return ({selectedBrands, selectedSeasons, selectedYears})
+}
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.handleBrandChange = this.handleBrandChange.bind(this)
-    this.handleYearChange = this.handleYearChange.bind(this)
-    this.handleSeasonChange = this.handleSeasonChange.bind(this)
+  componentDidMount() {
+    this.props.fetchBrands();
+    this.props.fetchYears();
+    this.props.fetchSeasons();
   }
-
-  componentWillMount() {
-    const { dispatch } = this.props
-    dispatch(fetchBrands())
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.selectedBrand !== prevProps.selectedBrand ) {
-      const { dispatch, selectedBrand } = this.props
-      dispatch(fetchBrand(selectedBrand))
-    } else if (this.props.selectedYear !== prevProps.selectedYear ) {
-      const { dispatch, selectedYear } = this.props
-      dispatch(fetchYear(selectedYear))
-    } else if (this.props.selectedSeason !== prevProps.selectedSeason ) {
-      const { dispatch, selectedSeason } = this.props
-      dispatch(fetchSeason(selectedSeason))
-    }
-  }
-
-  handleBrandChange(nextBrand) {
-    console.log(nextBrand)
-    this.props.dispatch(selectBrand(nextBrand))
-    this.props.dispatch(fetchBrand(nextBrand))
-  }
-
-  handleYearChange(nextYear) {
-    console.log(nextYear)
-    this.props.dispatch(selectYear(nextYear))
-    this.props.dispatch(fetchYear(nextYear))
-  }
-
-  handleSeasonChange(nextSeason) {
-    console.log(nextSeason)
-    this.props.dispatch(selectSeason(nextSeason))
-    this.props.dispatch(fetchSeason(nextSeason))
-  }
-
 
   render() {
-    const { brands, selectedBrand, selectedYear, selectedSeason } = this.props
+    const {
+      data,
+      selections,
+      handleBrandChange,
+      handleSeasonChange,
+      handleYearChange,
+      setRandomSelections
+    } = this.props;
     return (
       <div className="app">
-        <Nav />
         <div className="dropdowns-bar">
-          <h1>Show Me:</h1>
-          <div class="dropdown-selects">
-            <BrandDropdown value={selectedBrand}
-            onChange={this.handleBrandChange}
-            brands={brands} />
-            <SeasonDropdown value={selectedSeason}
-            onChange={this.handleSeasonChange}
-            seasons={['Fall', 'Spring','Pre-Fall', 'Resort', 'Spring Couture', 'Fall Couture']} />
-            <YearDropdown value={selectedYear}
-            onChange={this.handleYearChange}
-            years={[2020, 2019, 2018, 2017, 2016, 2015]} />
-            </div>
+          <div className="title-selects">
+            <h1>Show Me: </h1>
+            <span className="selection-label">
+              <div>{formatLabel(selections.selectedBrands, "brand-text")}</div>
+              <div>{formatLabel(selections.selectedSeasons, "season-text")}</div>
+              <div>{formatLabel(selections.selectedYears, "year-text")}</div>
+            </span>
           </div>
-      <DisplayImages/>
+          <div className="dropdown-selects">
+            <FilterDropdown
+              options={data.brands}
+              selectedOptions={selections.selectedBrands}
+              onSelectionChange={handleBrandChange}
+              label="Brands"
+            />
+            <FilterDropdown
+              options={data.seasons}
+              selectedOptions={selections.selectedSeasons}
+              onSelectionChange={handleSeasonChange}
+              label="Seasons"
+            />
+            <FilterDropdown
+              options={data.years}
+              selectedOptions={selections.selectedYears}
+              onSelectionChange={handleYearChange}
+              label="Years"
+            />
+            <RandomButton
+              onButtonClick={setRandomSelections}
+            />
+          </div>
+        </div>
+        <ImageGallery
+          selectedBrands={selections.selectedBrands}
+          selectedYears={selections.selectedYears}
+          selectedSeasons={selections.selectedSeasons}
+        />
       </div>
-    )
+    );
   }
 }
 
-App.propTypes = {
-  selectedBrand: PropTypes.string.isRequired,
-  selectedYear: PropTypes.number.isRequired,
-  selectedSeason: PropTypes.string.isRequired
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    fetchBrands() {
+      dispatch(fetchBrands());
+    },
+    fetchYears() {
+      dispatch(fetchYears());
+    },
+    fetchSeasons() {
+      dispatch(fetchSeasons());
+    },
+    handleBrandChange(selectedBrands) {
+      dispatch(changeBrand(selectedBrands));
+    },
+    handleSeasonChange(selectedSeasons) {
+      dispatch(changeSeason(selectedSeasons));
+    },
+    handleYearChange(selectedYears) {
+      dispatch(changeYear(selectedYears));
+    },
+    setMultiple(selectedOptions) {
+      dispatch(setMultiple(selectedOptions))
+    }
+  };
 }
 
 function mapStateToProps(state) {
-  const { brands, selectedBrand, selectedYear, selectedSeason } = state
+  const { data, selections } = state;
 
   return {
-    brands,
-    selectedBrand,
-    selectedYear,
-    selectedSeason
+    data,
+    selections,
+  };
+}
+
+function mergeProps(propsFromState, propsFromDispatch, ownProps) {
+  return {
+    setRandomSelections: () => propsFromDispatch.setMultiple(randomShow(propsFromState.data)),
+    ...propsFromState,
+    ...propsFromDispatch,
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App);

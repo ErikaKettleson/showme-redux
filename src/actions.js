@@ -1,72 +1,96 @@
-export const SELECT_BRAND = 'SELECT_BRAND'
-export const FETCH_BRAND = 'FETCH_BRAND'
-export const SELECT_YEAR = 'SELECT_YEAR'
-export const FETCH_YEAR = 'FETCH_YEAR'
-export const SELECT_SEASON = 'SELECT_SEASON'
-export const FETCH_SEASON = 'FETCH_SEASON'
+export const RECEIVE_BRANDS = "RECEIVE_BRANDS";
+export const RECEIVE_YEARS = "RECEIVE_YEARS";
+export const RECEIVE_SEASONS = "RECEIVE_SEASONS";
+export const CHANGE_RANDOM = "CHANGE_RANDOM";
+export const CHANGE_BRAND = "CHANGE_BRAND";
+export const CHANGE_YEAR = "CHANGE_YEAR";
+export const CHANGE_SEASON = "CHANGE_SEASON";
 
-export const RECEIVE_BRANDS = 'RECEIVE_BRANDS'
+export function changeBrand(selectedBrands) {
+  return {
+    type: CHANGE_BRAND,
+    selectedBrands,
+  };
+}
+
+export function changeYear(selectedYears) {
+  return {
+    type: CHANGE_YEAR,
+    selectedYears,
+  };
+}
+
+export function changeSeason(selectedSeasons) {
+  return {
+    type: CHANGE_SEASON,
+    selectedSeasons,
+  };
+}
+
+export function changeRandom(selectedOptions) {
+  return {
+    type: CHANGE_RANDOM,
+    selectedOptions,
+  };
+}
 
 export function receiveBrands(brands) {
-    return {
-        type: RECEIVE_BRANDS,
-        brands
-    }
+  return {
+    type: RECEIVE_BRANDS,
+    brands,
+  };
+}
+
+export function receiveYears(years) {
+  return {
+    type: RECEIVE_YEARS,
+    years,
+  };
+}
+
+export function receiveSeasons(seasons) {
+  return {
+    type: RECEIVE_SEASONS,
+    seasons,
+  };
+}
+
+// export function setMultiple({selectedBrands, selectedYears, selectedSeasons}) {
+//   return (dispatch) => {
+//     dispatch(changeBrand(selectedBrands));
+//     dispatch(changeSeason(selectedSeasons));
+//     dispatch(changeYear(selectedYears));
+//   }
+// }
+
+export function setMultiple(actions) {
+  return (dispatch) => {
+    dispatch(changeBrand(actions.selectedBrands));
+    dispatch(changeSeason(actions.selectedSeasons));
+    dispatch(changeYear(actions.selectedYears));
+  };
 }
 
 export function fetchBrands() {
-    return function(dispatch) {
-        return fetch(`http://server.local/api/brands`)
-        .then(
-            response => response.json()
-        )
-        .then(json => {
-            debugger
-            dispatch(receiveBrands(json))
-        })
-    }
+  return (dispatch) => {
+    fetch(`http://server.local/api/brands`)
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveBrands(json)));
+  };
 }
 
-
-
-export function selectBrand(brand) {
-    return {
-        type: SELECT_BRAND,
-        brand
-    }
+export function fetchYears() {
+  return (dispatch) => {
+    fetch(`http://server.local/api/years`)
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveYears(json)));
+  };
 }
 
-export function fetchBrand(brand) {
-    return {
-        type: FETCH_BRAND,
-        brand
-    }
-}
-
-export function selectYear(year) {
-    return {
-        type: SELECT_YEAR,
-        year
-    }
-}
-
-export function fetchYear(year) {
-    return {
-        type: FETCH_YEAR,
-        year
-    }
-}
-
-export function selectSeason(season) {
-    return {
-        type: SELECT_SEASON,
-        season
-    }
-}
-
-export function fetchSeason(season) {
-    return {
-        type: FETCH_SEASON,
-        season
-    }
+export function fetchSeasons() {
+  return (dispatch) => {
+    fetch(`http://server.local/api/seasons`)
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveSeasons(json)));
+  };
 }
