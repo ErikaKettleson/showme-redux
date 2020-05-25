@@ -1,50 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./ImageGallery.scss";
+import {colors} from "@material-ui/core";
 
 const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
-  const [imagePalette, setImagePalette] = useState([]);
+  const [imagePaletteIsOpen, setImagePaletteisOpen] = useState(false);
 
+  // an extra div along with the image that shows the palette
+  // then, make sure it is hidden by default
+  // then, onclick / onhover, unhide it
+  // u can track it's hidden-ness via state
   const imagesGrid = (images) => {
-    return images.map((imageUrl) => (
-      <div className="thumbnail-image">
-        <img src={imageUrl + ".thumb"} />
+    debugger;
+    return images.map((image, index) => (
+      <div className="thumbnail-image" onClick={openLightbox}>
+        <img index={index} src={image.src + ".thumb"} />
+        {imagePaletteIsOpen && currentImage===index ? (
+          <span> {Object.keys(images[currentImage].colors)} </span>
+        ) : null }
       </div>
     ));
   };
 
-  const getImagePalette = () => {
-    console.log(images[currentImage].thumbnail);
-    // temp mock palette
-    const imagePalette = [
-      "#EEF0EF",
-      "#808080",
-      "#DAF7A6",
-      "#FFC300",
-      "#FF5733",
-      "#C70039",
-      "#900C3F",
-      "#581845",
-    ];
-    setImagePalette(imagePalette);
-  };
+  const openLightbox = useCallback((e) => {
+    debugger;
+    setCurrentImage(Number(e.target.attributes.index.value));
+    setImagePaletteisOpen(prev => !prev);
+  }, []);
 
   const formatImagePalette = (imagePalette, color) => {
     return imagePalette.map((color) => (
       <div style={{ backgroundColor: color }}>{color}</div>
     ));
-  };
-
-  const processImageJson = (json) => {
-    return json.map((imageUrl) => {
-      return {
-        src: imageUrl,
-        thumbnail: imageUrl + ".thumb",
-        thumbnailWidth: 209,
-        thumbnailHeight: 314,
-      };
-    });
   };
 
   useEffect(() => {
@@ -62,7 +50,6 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
       response
         .json()
         .then((json) => setImages(json))
-        // .then((processedJson) => setImages(processedJson))
         .catch((err) => console.log(err));
     }
 
@@ -72,15 +59,6 @@ const ImageGallery = ({ selectedBrands, selectedYears, selectedSeasons }) => {
   return (
     <div className="image-grid">
       {imagesGrid(images)}
-      <div className="image-placeholder"></div>
-      <div className="image-placeholder"></div>
-      <div className="image-placeholder"></div>
-      <div className="image-placeholder"></div>
-      <div className="image-placeholder"></div>
-      <div className="image-placeholder"></div>
-      <div className="image-placeholder"></div>
-      <div className="image-placeholder"></div>
-      <div className="image-placeholder"></div>
       </div>
   );
 };
